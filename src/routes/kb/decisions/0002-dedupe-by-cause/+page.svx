@@ -4,7 +4,7 @@ title: '0002 · Split date reports by cause'
 owner: support desk
 status: proposed
 reviewed: 2026-10-29
-signature: 'Codex for Michał Salewski'
+signature: 'v1.eyJzdWIiOiIzOTYxIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMzMTE1NDAsImV4cCI6MTc5MzM5Nzk0MH0.bhTGUnZ_W56rNmQP-J2K05mjug8gBJlJFAjAfgJN5ZU'
 ---
 
 <script>
