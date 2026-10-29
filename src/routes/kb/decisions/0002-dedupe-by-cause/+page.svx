@@ -1,0 +1,70 @@
+---
+layout: runbook
+title: '0002 · Split date reports by cause'
+owner: support desk
+status: proposed
+reviewed: 2026-10-29
+signature: 'Codex for Michał Salewski'
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+</script>
+
+## Decision
+
+This record proposes replacing [0001, subject-only merging](/kb/decisions/0001-dedupe-by-subject/).
+That accepted record remains unchanged. Match reports by cause, using tenant locale,
+booking-form version and report channel. A matching subject is a clue, not a merge rule.
+Unknown tenants require investigation rather than an automatic merge.
+
+## What #4471 contains
+
+The table below deduplicates report IDs, selects #4471 and runs the exported cause classifier
+against the tenant directory. Counts come from data at render time, not browser-locale tags.
+
+<CauseTable ticket={4471} />
+
+**Shared parser:** day-first tenants enter day/month dates but the shared parser reads
+month/day. This affects app and email reports, booking-v2 forms, and non-form reports from
+booking-v3 tenants. For example, R-41203 says “Booked for 2 December. The invite says 12 February.”
+Fix the parser's date contract and test ambiguous dates using the tenant's format.
+
+**Booking-v3 hint:** its form displays MM/DD/YYYY for day-first tenants, while the form
+interprets input in the tenant's order. This is a separate input-hint defect. Alder Physio,
+Copper Studio and Pale Harbour run booking-v3. Fix the hint and input interpretation together;
+do not assume a shared-parser fix will repair this route.
+
+Keep these as separate issues. The export's intake tags are guesses based on browser locale,
+so their totals do not measure these causes. The source has overlapping export pages; one ID
+counts once. Reports are not a count of unique users or independent booking events.
+
+## The queue did not start in July
+
+<QueueTimeline ticket={4471} />
+
+The first receipt is in April. The large early-July bar records merges of older reports,
+not a July outbreak. Receipt and merge timestamps answer different questions. Weekly buckets
+use the calendar date written in each timestamp, without timezone conversion; original
+numeric offsets remain in the source export. Booking dates quoted in bodies are separate.
+
+## Exceptions and triage
+
+The desk flags R-41202, R-41209, R-41236, R-41344 and R-41620 as one-day-move readings.
+The table footnotes them within their tenant-derived group. Their wording does not by itself
+prove a third timezone defect. Investigate these reports separately before promising that a
+parser fix resolves every symptom; preserve their IDs and original wording.
+
+## How to apply this
+
+Read the tenant's configuration, channel and body before merging. Confirm the same cause
+with `sameCause` in `src/lib/kb/causes.ts`; use the existing dedupe explorer to compare cases.
+Keep the parser work in its own ticket and give the hint defect its own ticket. Link both from
+the incident, review stale triage guidance, and refresh the live tables as the queue changes.
+
+This is a triage proposal, not evidence that either product fix has shipped. The old incident's
+“one issue, one fix” statement is superseded by this analysis.
+
+<RenderStamp {signature} />
