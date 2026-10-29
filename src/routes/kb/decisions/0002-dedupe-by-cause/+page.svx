@@ -64,7 +64,19 @@ with `sameCause` in `src/lib/kb/causes.ts`; use the existing dedupe explorer to 
 Keep the parser work in its own ticket and give the hint defect its own ticket. Link both from
 the incident, review stale triage guidance, and refresh the live tables as the queue changes.
 
-This is a triage proposal, not evidence that either product fix has shipped. The old incident's
-“one issue, one fix” statement is superseded by this analysis.
+The old incident's “one issue, one fix” statement is superseded by this analysis.
+
+## Engineering outcome
+
+The course desk update records **#4471 closed 05 oct**. It reports the parser as **fixed**,
+with “fix(dates): parse dd/mm for eu locales”. It records the hint as **won't fix** because
+the **booking-v3 form retired**. These are different outcomes: closing the parent ticket does
+not mean both defects were fixed. The update gives no time or timezone, and no explicit year.
+
+Our [parser ticket](https://github.com/msalewski/mega-s01e03-what-it-shows/issues/1)
+closes as completed; our [hint ticket](https://github.com/msalewski/mega-s01e03-what-it-shows/issues/2)
+closes as not planned. The report counts above remain historical counts from the export,
+not reports of an active booking-v3 form. This proposal changes triage policy; it does not
+claim that policy 0001 has already been formally replaced.
 
 <RenderStamp {signature} />

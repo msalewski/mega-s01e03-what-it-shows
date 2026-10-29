@@ -18,4 +18,7 @@ and the desk signature stamp are rendered by the original KB components.
 
 The two GitHub issues separate the shared parser (379 unique reports) from the booking-v3
 hint (33 unique reports). Intake tags give different counts and are not root-cause evidence.
-There are 427 export rows and 412 unique IDs. No product fix is claimed to have shipped.
+There are 427 export rows and 412 unique IDs. The subsequent course engineering update
+closed #4471 on “05 oct”: parser fixed, hint won't fix because booking-v3 was retired.
+Issue #1 closes as completed; issue #2 closes as not planned. The signed page records
+both outcomes without treating retirement as a fix.
